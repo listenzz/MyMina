@@ -12,7 +12,7 @@
     "autoAudits": false,
     "checkInvalidKey": true
   },
-  "miniprogramRoot": "src/",
+  "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
   "libVersion": "2.7.0",
   "appid": "wx0eabbc4fee672db4",

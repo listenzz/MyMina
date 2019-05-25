@@ -1,0 +1,53 @@
+{
+  "name": "miniprogram-test-1",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rimraf \"./dist/!(app.json)**\"",
+    "prestart": "run-s clean",
+    "prebuild": "run-s clean",
+    "start": "webpack --watch --progress",
+    "build": "cross-env NODE_ENV=production webpack",
+    "preupload": "run-s build",
+    "upload": "run-script-os",
+    "upload:darwin": "/Applications/wechatwebdevtools.app/Contents/MacOS/cli -u $npm_package_version@$INIT_CWD",
+    "upload:win32": "C:/Program Files (x86)/Tencent/微信web开发者工具/cli.bat -u $npm_package_version@$INIT_CWD"
+  },
+  "dependencies": {
+    "es6-promise": "^4.1.1",
+    "moment": "^2.24.0",
+    "rxjs": "^6.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/runtime-corejs2": "^7.0.0",
+    "@tinajs/mina-entry-webpack-plugin": "^1.1.1",
+    "@tinajs/mina-loader": "^1.5.1",
+    "@tinajs/mina-runtime-webpack-plugin": "^1.2.1",
+    "@tinajs/wxml-loader": "^0.3.0-fork.0",
+    "@tinajs/wxs-loader": "^1.2.1",
+    "babel-loader": "^8.0.4",
+    "copy-webpack-plugin": "^5.0.3",
+    "cross-env": "^5.1.1",
+    "file-loader": "^1.1.5",
+    "npm-run-all": "^4.1.2",
+    "postcss-loader": "^2.1.3",
+    "postcss-px2units": "^0.1.1",
+    "postcss-url": "^7.3.1",
+    "precss": "^2.0.0",
+    "relative-file-loader": "^1.1.12",
+    "rimraf": "^2.6.2",
+    "run-script-os": "^1.0.5",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^4.16.0",
+    "webpack-cli": "^3.1.0"
+  }
+}
