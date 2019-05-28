@@ -2,7 +2,8 @@ const { resolve } = require("path");
 const webpack = require("webpack");
 const MinaEntryPlugin = require("@tinajs/mina-entry-webpack-plugin");
 const MinaRuntimePlugin = require("@tinajs/mina-runtime-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -26,6 +27,10 @@ module.exports = {
     filename: "[name]",
     publicPath: "/",
     globalObject: "wx"
+  },
+  resolve: {
+    symlinks: true,
+    extensions: [".ts", ".js"]
   },
   module: {
     rules: [
@@ -95,16 +100,16 @@ module.exports = {
       }
     ]
   },
-  resolve: {
-    symlinks: true,
-    extensions: [".ts", ".js"]
-  },
   plugins: [
+    new CopyWebpackPlugin(["./sitemap.json"]),
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: false
+    }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
       DEBUG: false
     }),
-    new CopyPlugin(["./sitemap.json"]),
+
     new MinaEntryPlugin(),
     new MinaRuntimePlugin()
   ],
