@@ -47,7 +47,7 @@ module.exports = {
         use: "@tinajs/mina-loader"
       },
       {
-        test: /\.js$/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: loaders.script
       },
@@ -96,7 +96,8 @@ module.exports = {
     ]
   },
   resolve: {
-    symlinks: true
+    symlinks: true,
+    extensions: [".ts", ".js"]
   },
   plugins: [
     new webpack.EnvironmentPlugin({

@@ -5,7 +5,8 @@
       {
         "modules": false,
         "loose": true
-      }
+      },
+      "@babel/typescript"
     ]
   ],
   "plugins": [
@@ -15,7 +16,7 @@
         "corejs": 2
       }
     ],
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-export-default-from"
+    "@babel/proposal-class-properties",
+    "@babel/proposal-export-default-from"
   ]
 }
