@@ -118,6 +118,6 @@ module.exports = {
       name: "runtime.js"
     }
   },
-  mode: isProduction ? "production" : "none"
-  //mode: "production"
+  mode: isProduction ? "production" : "none",
+  devtool: isProduction ? "source-map" : "inline-source-map"
 };
