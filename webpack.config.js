@@ -7,18 +7,6 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
-const loaders = {
-  script: "babel-loader",
-  style: {
-    loader: "postcss-loader",
-    options: {
-      config: {
-        path: resolve("./postcss.config.js")
-      }
-    }
-  }
-};
-
 module.exports = {
   context: resolve("src"),
   entry: "./app",
@@ -41,7 +29,7 @@ module.exports = {
           {
             loader: "@tinajs/mina-loader",
             options: {
-              loaders
+              script: "babel-loader"
             }
           }
         ]
@@ -54,12 +42,7 @@ module.exports = {
       {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
-        use: loaders.script
-      },
-      {
-        test: /\.(css|wxss)$/,
-        exclude: /node_modules/,
-        use: loaders.style
+        use: "babel-loader"
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,

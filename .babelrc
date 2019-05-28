@@ -9,14 +9,5 @@
       "@babel/typescript"
     ]
   ],
-  "plugins": [
-    [
-      "@babel/plugin-transform-runtime",
-      {
-        "corejs": 2
-      }
-    ],
-    "@babel/proposal-class-properties",
-    "@babel/proposal-export-default-from"
-  ]
+  "plugins": ["@babel/proposal-class-properties"]
 }
