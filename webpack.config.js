@@ -119,4 +119,5 @@ module.exports = {
     }
   },
   mode: isProduction ? "production" : "none"
+  //mode: "production"
 };
