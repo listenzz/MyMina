@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "sourceMap": true,
     "module": "es6",
     "moduleResolution": "node",
     "target": "es5",
@@ -10,11 +9,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "skipLibCheck": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "./typings",
-      "node_modules/miniprogram-api-typings"
-    ]
+    "typeRoots": ["node_modules/@types", "./typings"]
   },
   "include": ["src/**/*.ts", "src/**/*.js"]
 }
