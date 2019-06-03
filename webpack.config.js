@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MinaWebpackPlugin = require("./plugin/MinaWebpackPlugin");
 const MinaRuntimePlugin = require("./plugin/MinaRuntimePlugin");
-//const MinaRuntimePlugin = require("@tinajs/mina-runtime-webpack-plugin");
+const LodashWebpackPlugin = require("lodash-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -58,7 +58,8 @@ module.exports = {
       scriptExtensions: [".ts", ".js"],
       assetExtensions: [".scss"]
     }),
-    new MinaRuntimePlugin()
+    new MinaRuntimePlugin(),
+    new LodashWebpackPlugin()
   ],
   optimization: {
     splitChunks: {
