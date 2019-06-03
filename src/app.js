@@ -1,8 +1,8 @@
 //app.js
-//import moment from "moment";
 
 import { range } from "rxjs";
 import { map, filter } from "rxjs/operators";
+import { camelCase } from "lodash";
 
 range(1, 200)
   .pipe(
@@ -14,8 +14,7 @@ range(1, 200)
 App({
   onLaunch: function() {
     console.log("-----------------------------------------------");
-    // let sFromNowText = moment(new Date().getTime() - 360000).fromNow();
-    // console.log(sFromNowText);
+    console.log(camelCase("OnLaunch"));
 
     // 展示本地存储能力
     var logs = wx.getStorageSync("logs") || [];

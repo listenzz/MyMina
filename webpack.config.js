@@ -3,7 +3,8 @@ const webpack = require("webpack");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MinaWebpackPlugin = require("./plugin/MinaWebpackPlugin");
-const MinaRuntimePlugin = require("@tinajs/mina-runtime-webpack-plugin");
+const MinaRuntimePlugin = require("./plugin/MinaRuntimePlugin");
+//const MinaRuntimePlugin = require("@tinajs/mina-runtime-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -25,15 +26,38 @@ module.exports = {
         test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: "babel-loader"
+      },
+      {
+        test: /\.(scss|wxss|acss)$/,
+        include: /src/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              useRelativePath: true,
+              name: "[path][name].wxss",
+              context: resolve("src")
+            }
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              includePaths: [resolve("src", "styles"), resolve("src")]
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
-    new CopyWebpackPlugin(["**/*.!(ts|js)"]),
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false
     }),
-    new MinaWebpackPlugin(),
+    new CopyWebpackPlugin(["**/*.!(ts|js|scss)"]),
+    new MinaWebpackPlugin({
+      scriptExtensions: [".ts", ".js"],
+      assetExtensions: [".scss"]
+    }),
     new MinaRuntimePlugin()
   ],
   optimization: {

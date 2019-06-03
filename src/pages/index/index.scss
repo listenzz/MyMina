@@ -1,13 +1,17 @@
 /**index.wxss**/
+@import "share";
+
 .userinfo {
-  display: flex;
+  @extend %center-flex;
+
   flex-direction: column;
   align-items: center;
 }
 
 .userinfo-avatar {
-  width: 128rpx;
-  height: 128rpx;
+  $size: 128rpx;
+  width: $size;
+  height: $size;
   margin: 20rpx;
   border-radius: 50%;
 }
