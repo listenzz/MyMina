@@ -8,7 +8,6 @@
   "license": "ISC",
   "scripts": {
     "type-check": "tsc --noEmit",
-    "type-check:watch": "npm run type-check -- --watch",
     "start": "webpack --watch --progress",
     "build": "cross-env NODE_ENV=production webpack",
     "preupload": "run-s build",
@@ -19,6 +18,7 @@
   "sideEffects": false,
   "dependencies": {
     "lodash": "^4.17.11",
+    "moment": "^2.24.0",
     "rxjs": "^6.5.2"
   },
   "devDependencies": {

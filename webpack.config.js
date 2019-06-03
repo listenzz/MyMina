@@ -17,7 +17,7 @@ module.exports = {
     globalObject: 'wx',
   },
   resolve: {
-    symlinks: true,
+    // symlinks: true,
     extensions: ['.ts', '.js'],
   },
   module: {
@@ -60,6 +60,8 @@ module.exports = {
     }),
     new MinaRuntimePlugin(),
     new LodashWebpackPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(zh-cn)$/),
+    //new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
   optimization: {
     splitChunks: {
