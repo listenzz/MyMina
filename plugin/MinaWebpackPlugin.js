@@ -30,15 +30,22 @@ function inflateEntryResources(resources = [], context, entry) {
     const requests = config[key];
     if (Array.isArray(requests)) {
       requests.forEach(request => {
-        request = path.resolve(context, request);
-        if (request != null && !resources.includes(request)) {
-          resources.push(request);
-        }
+        inflate(resources, context, request);
       });
     } else if (typeof requests === "object") {
-      // TODO:
+      Object.values(requests).forEach(request => {
+        inflate(resources, context, request);
+      });
     }
   });
+}
+
+function inflate(resources, context, request) {
+  request = path.resolve(context, request);
+  if (request != null && !resources.includes(request)) {
+    resources.push(request);
+    inflateEntryResources(resources, path.dirname(request), request);
+  }
 }
 
 class MinaWebpackPlugin {

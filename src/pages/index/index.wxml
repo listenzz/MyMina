@@ -1,13 +1,13 @@
-<!--index.wxml-->
+<!-- index.wxml -->
+<import src="../../wxml/motto/motto.wxml" />
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view bindtap="bindViewTap">
+    <user avatarUrl="{{userInfo.avatarUrl}}" nickName="{{userInfo.nickName}}"></user>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="motto">
+    <template is="motto" data="{{motto:motto}}" />
+  </view>
+  <view class="powered">
+    <text>{{powered.by}}</text>
   </view>
 </view>
