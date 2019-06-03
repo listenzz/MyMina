@@ -1,8 +1,10 @@
 Component({
-	properties: {
-		innerText: {
-			type: String,
-			value: 'default value',
-		},
-	},
-});
+  properties: {
+    innerText: {
+      type: String,
+      value: 'default value',
+    },
+  },
+})
+
+export {}
