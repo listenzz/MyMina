@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "target": "es5",
     "allowJs": true,
+    "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,

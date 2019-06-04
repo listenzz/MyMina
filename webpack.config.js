@@ -53,7 +53,14 @@ module.exports = {
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
-    new CopyWebpackPlugin(['**/*.!(ts|js|scss)']),
+    //new CopyWebpackPlugin(['**/*.!(ts|js|scss)']),
+    new CopyWebpackPlugin([
+      {
+        from: '**/*',
+        to: './',
+        ignore: ['**/*.ts', '**/*.js', '**/*.scss'],
+      },
+    ]),
     new MinaWebpackPlugin({
       scriptExtensions: ['.ts', '.js'],
       assetExtensions: ['.scss'],

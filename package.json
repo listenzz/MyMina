@@ -13,7 +13,8 @@
     "preupload": "run-s build",
     "upload": "run-script-os",
     "upload:darwin": "/Applications/wechatwebdevtools.app/Contents/MacOS/cli -u $npm_package_version@$INIT_CWD",
-    "upload:win32": "C:/Program Files (x86)/Tencent/微信web开发者工具/cli.bat -u $npm_package_version@$INIT_CWD"
+    "upload:win32": "C:/Program Files (x86)/Tencent/微信web开发者工具/cli.bat -u $npm_package_version@$INIT_CWD",
+    "test": "jest"
   },
   "sideEffects": false,
   "dependencies": {
@@ -27,6 +28,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.13",
     "@types/lodash": "^4.14.133",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
@@ -40,6 +42,7 @@
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "file-loader": "^3.0.1",
+    "jest": "^24.8.0",
     "lodash-webpack-plugin": "^0.11.5",
     "node-sass": "^4.12.0",
     "npm-run-all": "^4.1.2",

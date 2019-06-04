@@ -15,3 +15,11 @@ const formatNumber = (n: number) => {
 }
 
 export { formatTime }
+
+export function include<T>(array: T[], data: T) {
+  return array.includes(data)
+}
+
+export function values<T>(array: T[]) {
+  return array.values()
+}
