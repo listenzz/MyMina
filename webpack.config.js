@@ -1,12 +1,12 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MinaWebpackPlugin = require('./plugin/MinaWebpackPlugin')
 const MinaRuntimePlugin = require('./plugin/MinaRuntimePlugin')
 const LodashWebpackPlugin = require('lodash-webpack-plugin')
 
-const isProduction = process.env.NODE_ENV === 'production'
+const debuggable = process.env.BUILD_TYPE !== 'release'
 
 module.exports = {
   context: resolve('src'),
@@ -17,7 +17,6 @@ module.exports = {
     globalObject: 'wx',
   },
   resolve: {
-    // symlinks: true,
     extensions: ['.ts', '.js'],
   },
   module: {
@@ -53,7 +52,6 @@ module.exports = {
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
-    //new CopyWebpackPlugin(['**/*.!(ts|js|scss)']),
     new CopyWebpackPlugin([
       {
         from: '**/*',
@@ -67,8 +65,10 @@ module.exports = {
     }),
     new MinaRuntimePlugin(),
     new LodashWebpackPlugin(),
-    new webpack.ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(zh-cn)$/),
-    //new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+    new webpack.EnvironmentPlugin({
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV) || 'development',
+      BUILD_TYPE: JSON.stringify(process.env.BUILD_TYPE) || 'debug',
+    }),
   ],
   optimization: {
     splitChunks: {
@@ -81,6 +81,6 @@ module.exports = {
       name: 'runtime',
     },
   },
-  mode: isProduction ? 'production' : 'none',
-  devtool: isProduction ? 'source-map' : 'inline-source-map',
+  mode: debuggable ? 'none' : 'production',
+  devtool: debuggable ? 'inline-source-map' : 'source-map',
 }

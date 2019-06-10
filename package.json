@@ -9,7 +9,7 @@
   "scripts": {
     "type-check": "tsc --noEmit",
     "start": "webpack --watch --progress",
-    "build": "cross-env NODE_ENV=production webpack",
+    "build": "cross-env NODE_ENV=production BUILD_TYPE=release webpack",
     "preupload": "run-s build",
     "upload": "run-script-os",
     "upload:darwin": "/Applications/wechatwebdevtools.app/Contents/MacOS/cli -u $npm_package_version@$INIT_CWD",
@@ -34,7 +34,7 @@
     "@typescript-eslint/parser": "^1.9.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-lodash": "^3.3.4",
-    "clean-webpack-plugin": "^2.0.2",
+    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.0.3",
     "cross-env": "^5.1.1",
     "ensure-posix-path": "^1.1.1",
