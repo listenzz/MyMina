@@ -2,8 +2,8 @@
 
 import { range } from 'rxjs'
 import { map, filter } from 'rxjs/operators'
-import { camelCase } from 'lodash'
-import moment from 'moment'
+//import { camelCase } from 'lodash'
+//import moment from 'moment'
 
 range(1, 200)
   .pipe(
@@ -14,11 +14,13 @@ range(1, 200)
 
 App({
   onLaunch: function() {
-    console.log('-----------------------------------------------')
-    console.log(camelCase('OnLaunch'))
+    console.log(`环境：${process.env.NODE_ENV} 构建类型：${process.env.BUILD_TYPE}`)
 
-    let sFromNowText = moment(new Date().getTime() - 360000).fromNow()
-    console.log(sFromNowText)
+    console.log('-----------------------------------------------')
+    //console.log(camelCase('OnLaunch'))
+
+    //let sFromNowText = moment(new Date().getTime() - 360000).fromNow()
+    //console.log(sFromNowText)
 
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
