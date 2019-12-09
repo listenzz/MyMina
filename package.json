@@ -1,5 +1,5 @@
 {
-  "name": "miniprogram-test-1",
+  "name": "my-mina",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -47,7 +47,7 @@
     "required-path": "^1.0.1",
     "run-script-os": "^1.0.5",
     "sass-loader": "^7.1.0",
-    "typescript": "^3.4.5",
+    "typescript": "^3.5.3",
     "webpack": "^4.16.0",
     "webpack-cli": "^3.1.0",
     "webpack-sources": "^1.3.0"
