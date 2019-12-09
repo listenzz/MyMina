@@ -9,8 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
-    "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types", "./typings"]
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts", "src/**/*.js"]
 }

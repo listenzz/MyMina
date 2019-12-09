@@ -4399,6 +4399,11 @@ minipass@^2.2.1, minipass@^2.3.5:
     safe-buffer "^5.1.2"
     yallist "^3.0.0"
 
+miniprogram-api-typings@^2.9.3:
+  version "2.9.3"
+  resolved "https://registry.npm.taobao.org/miniprogram-api-typings/download/miniprogram-api-typings-2.9.3.tgz?cache=0&sync_timestamp=1575616908266&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fminiprogram-api-typings%2Fdownload%2Fminiprogram-api-typings-2.9.3.tgz#3d290ccd2eec3fbfddd7fbe2098f4b90d7f7595a"
+  integrity sha1-PSkMzS7sP7/d1/viCY9LkNf3WVo=
+
 minizlib@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npm.taobao.org/minizlib/download/minizlib-1.2.1.tgz#dd27ea6136243c7c880684e8672bb3a45fd9b614"
