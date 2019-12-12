@@ -28,7 +28,7 @@
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
-    "eslint-config-mina": "^0.0.3",
+    "@sdcxp/eslint-config-mina": "^1.0.0",
     "@types/jest": "^24.0.13",
     "@types/lodash": "^4.14.133",
     "babel-loader": "^8.0.4",

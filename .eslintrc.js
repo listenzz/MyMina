@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['mina', 'plugin:prettier/recommended'],
+  extends: ['@sdcxp/mina', 'plugin:prettier/recommended'],
 }
