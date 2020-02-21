@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['@sdcxp/mina', 'plugin:prettier/recommended'],
+  extends: ['@gfez/wechat-miniprogram', 'plugin:prettier/recommended'],
 }
