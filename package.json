@@ -29,7 +29,6 @@
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-typescript": "^7.3.3",
     "@gfez/eslint-config-wechat-miniprogram": "^1.0.1",
-    "@types/jest": "^24.0.13",
     "@types/lodash": "^4.14.133",
     "babel-loader": "^8.0.4",
     "babel-plugin-lodash": "^3.3.4",
