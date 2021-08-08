@@ -18,15 +18,26 @@ function _inflateEntries(entries = [], dirname, entry) {
   const content = fs.readFileSync(configFile, 'utf8')
   const config = JSON.parse(content)
 
-  ;['pages', 'usingComponents'].forEach(key => {
-    const items = config[key]
-    if (typeof items === 'object') {
-      Object.values(items).forEach(item => inflateEntries(entries, dirname, item))
-    }
-  })
+  const { pages, usingComponents, subpackages } = config
+  pages && pages.forEach(item => inflateEntries(entries, dirname, item))
+  usingComponents && Object.values(usingComponents).forEach(item => inflateEntries(entries, dirname, item))
+  subpackages &&
+    subpackages.forEach(subpackage =>
+      subpackage.pages.forEach(item => inflateEntries(entries, dirname + `/${subpackage.root}`, item)),
+    )
 }
 
 function inflateEntries(entries, dirname, entry) {
+  if (/plugin:\/\//.test(entry)) {
+    console.log(`发现插件 ${entry}`)
+    return
+  }
+
+  //通过useExtendedLib扩展库的方式引入WeUI组件https://developers.weixin.qq.com/miniprogram/dev/extended/weui/quickstart.html
+  //扩展库内置于开发者工具中，此处无需处理
+  //WeUI组件路径包含weui-miniprogram，据此进行判断
+  if (entry.includes('weui-miniprogram')) return
+
   entry = path.resolve(dirname, entry)
   if (entry != null && !entries.includes(entry)) {
     entries.push(entry)
@@ -89,8 +100,8 @@ class MinaWebpackPlugin {
       return true
     })
 
-    compiler.hooks.watchRun.tap('MinaWebpackPlugin', (compiler, done) => {
-      this.applyEntry(compiler, done)
+    compiler.hooks.watchRun.tap('MinaWebpackPlugin', (_compiler, done) => {
+      this.applyEntry(_compiler, done)
     })
 
     compiler.hooks.compilation.tap('MinaWebpackPlugin', compilation => {

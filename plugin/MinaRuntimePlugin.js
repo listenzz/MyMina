@@ -1,7 +1,7 @@
+/* eslint-disable no-bitwise */
 /*
  * forked from https://github.com/Cap32/wxapp-webpack-plugin/
  */
-const fs = require('fs')
 const path = require('path')
 const ensurePosix = require('ensure-posix-path')
 const { ConcatSource } = require('webpack-sources')
