@@ -1,17 +1,9 @@
 const SingleEntryPlugin = require('webpack/lib/SingleEntryPlugin')
-const MultiEntryPlugin = require('webpack/lib/MultiEntryPlugin')
 const path = require('path')
 const fs = require('fs')
 const replaceExt = require('replace-ext')
 
 const assetsChunkName = '__assets_chunk_name__'
-
-function itemToPlugin(context, item, name) {
-  if (Array.isArray(item)) {
-    return new MultiEntryPlugin(context, item, name)
-  }
-  return new SingleEntryPlugin(context, item, name)
-}
 
 function _inflateEntries(entries = [], dirname, entry) {
   const configFile = replaceExt(entry, '.json')
@@ -31,6 +23,14 @@ function inflateEntries(entries, dirname, entry) {
   if (/plugin:\/\//.test(entry)) {
     console.log(`发现插件 ${entry}`)
     return
+  }
+
+  if (typeof entry === 'object') {
+    entry = entry.main.import[0]
+  }
+
+  if (typeof entry !== 'string') {
+    throw new Error('入口文件位置获取有误，请检查webpack版本或webpack配置(webpack.config.js)是否发生变化')
   }
 
   //通过useExtendedLib扩展库的方式引入WeUI组件https://developers.weixin.qq.com/miniprogram/dev/extended/weui/quickstart.html
@@ -79,12 +79,12 @@ class MinaWebpackPlugin {
     this.entries
       .map(item => first(item, this.scriptExtensions))
       .map(item => path.relative(context, item))
-      .forEach(item => itemToPlugin(context, './' + item, replaceExt(item, '')).apply(compiler))
+      .forEach(item => new SingleEntryPlugin(context, './' + item, replaceExt(item, '')).apply(compiler))
 
-    const assets = this.entries
+    this.entries
       .reduce((items, item) => [...items, ...all(item, this.assetExtensions)], [])
       .map(item => './' + path.relative(context, item))
-    itemToPlugin(context, assets, assetsChunkName).apply(compiler)
+      .forEach(item => new SingleEntryPlugin(context, item, item + assetsChunkName).apply(compiler))
 
     if (done) {
       done()
@@ -103,13 +103,13 @@ class MinaWebpackPlugin {
     compiler.hooks.watchRun.tap('MinaWebpackPlugin', (_compiler, done) => {
       this.applyEntry(_compiler, done)
     })
-
     compiler.hooks.compilation.tap('MinaWebpackPlugin', compilation => {
       compilation.hooks.beforeChunkAssets.tap('MinaWebpackPlugin', () => {
-        const assetsChunkIndex = compilation.chunks.findIndex(({ name }) => name === assetsChunkName)
-        if (assetsChunkIndex > -1) {
-          compilation.chunks.splice(assetsChunkIndex, 1)
-        }
+        compilation.chunks.forEach(chunk => {
+          if (chunk.name.includes(assetsChunkName)) {
+            compilation.chunks.delete(chunk)
+          }
+        })
       })
     })
   }

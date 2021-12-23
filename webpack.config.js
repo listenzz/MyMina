@@ -10,10 +10,11 @@ const debuggable = process.env.BUILD_TYPE !== 'release'
 
 module.exports = {
   context: resolve('src'),
-  entry: './app.js',
+  entry: { main: './app.js' },
   output: {
     path: resolve('dist'),
     filename: '[name].js',
+    publicPath: resolve('dist'),
     globalObject: 'wx',
   },
   resolve: {
@@ -41,7 +42,7 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              includePaths: [resolve('src', 'styles'), resolve('src')],
+              sassOptions: { includePaths: [resolve('src', 'styles'), resolve('src')] },
             },
           },
         ],
@@ -52,13 +53,15 @@ module.exports = {
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
     }),
-    new CopyWebpackPlugin([
-      {
-        from: '**/*',
-        to: './',
-        ignore: ['**/*.ts', '**/*.js', '**/*.scss'],
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: '**/*',
+          to: './',
+          filter: resourcePath => !['.ts', '.js', '.scss'].some(item => resourcePath.endsWith(item)),
+        },
+      ],
+    }),
     new MinaWebpackPlugin({
       scriptExtensions: ['.ts', '.js'],
       assetExtensions: ['.scss'],
